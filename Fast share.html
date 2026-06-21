@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samsung Fast WebShare</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .share-container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+        h2 { color: #034EA2; margin-bottom: 20px; }
+        .btn {
+            background-color: #034EA2;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+        .btn:hover { background-color: #003366; }
+        #fileInput { display: none; }
+        .status { margin-top: 15px; color: #666; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+<div class="share-container">
+    <h2>Samsung Fast Share</h2>
+    <p>ළඟම ඇති Samsung දුරකථනයට වේගයෙන් ෆයිල් යවන්න</p>
+    
+    <button class="btn" onclick="startDiscovery()">ළඟ ඇති දුරකථන සොයන්න</button>
+    
+    <button class="btn" style="background-color: #28a745;" onclick="document.getElementById('fileInput').click()">ෆයිල් එකක් තෝරන්න</button>
+    <input type="file" id="fileInput" onchange="fileSelected()">
+    
+    <div class="status" id="statusBox">තත්ත්වය: සූදානම්</div>
+</div>
+
+<script>
+    function startDiscovery() {
+        document.getElementById('statusBox').innerText = "තත්ත්වය: අනෙක් දුරකථනය සොයමින්... (Connecting via WebRTC/Local IP)";
+        // මෙතනදී WebRTC හෝ Local WebSocket හරහා peer-to-peer සම්බන්ධතාවය ගොඩනැගේ
+    }
+
+    function fileSelected() {
+        const fileInput = document.getElementById('fileInput');
+        if(fileInput.files.length > 0) {
+            const fileName = fileInput.files[0].name;
+            document.getElementById('statusBox').innerText = `තෝරාගත් ෆයිල් එක: ${fileName} \nදැන් ඉතා ඉහල වේගයකින් යැවීමට සූදානම්!`;
+        }
+    }
+</script>
+
+</body>
+</html>
